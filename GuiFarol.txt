@@ -1,0 +1,182 @@
+package Gui;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class GuiFarol extends JFrame implements Runnable{
+
+
+	
+	public ImageIcon imagem;
+	public Color amarelo,verde,vermelho;
+	public JButton parar;
+	public String resp; 
+	public Temporizador temporizador;
+	public JPanel painel;
+
+	
+	
+	public GuiFarol(){
+
+		
+		inicializacao();
+		acoes();
+
+	}
+
+	
+	
+	
+	
+	
+
+	public void inicializacao(){
+
+		
+	
+
+		imagem=new ImageIcon("C:/Users/michel/Desktop/XTI/ProjetoFarol/src/Gui/semafaro.jpg");   // definindo a imagem do semaforo
+		Container c=getContentPane();																// criando Container
+
+		 painel=new JPanel(){																		//painel que recebe a imagem do semaforo 
+
+
+			public void paintComponent(Graphics g){													// redefinindo o metodo paintComponent
+
+
+
+
+				super.paintComponent(g);
+				g.drawImage(imagem.getImage(),0,0,this.getWidth(),this.getHeight(),this);  // aqui o painel pega a imagem define alguns paramentros 
+
+
+				g.setColor(vermelho);					// define a cor do desenho
+				g.fillOval(180,60,125,100);				// cria um circulo
+				g.setColor(amarelo);
+				g.fillOval(180,198,125,100);
+
+				g.setColor(verde);
+				g.fillOval(180,335,125,100);
+
+
+
+			}
+
+
+		};
+
+
+		parar=new JButton("Stop");				// criando o botão de stop
+		parar.setBounds(10,5,60,20);
+		painel.add(parar);
+		
+		painel.setLayout(null);					// definindo layout como null		
+		painel.setSize(500,500);				// definindo o tamanho do painel		
+		c.add(painel);							// adicionando o painel no Container
+
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // operação de fechamento da janela
+		setVisible(true);								 // tela visivel		
+		setSize(500,500);
+
+		
+		
+		
+		
+		
+		
+
+	}	
+
+	
+	public  void trocaCor(Color yelow,Color green, Color red){   // pega as cores do farolteste 
+		
+				
+		this.amarelo=yelow;
+		this.vermelho=red;
+		this.verde=green;
+			
+		
+		
+	}
+	
+	
+	
+	public void acoes(){
+		
+		parar.addActionListener(new ActionListener(){				// ação do botão fechar
+			public void actionPerformed(ActionEvent e){
+			
+			
+				
+				
+				 resp=JOptionPane.showInputDialog("Quer realmente fechar o programa? S/N");  // faz pergunta 
+				
+				 if(resp.equals("S")){														// laço de decisão
+						
+						System.exit(0);
+						
+					}
+				
+				 if(resp.equals("N")){
+				
+					 
+					 JOptionPane.showMessageDialog(null,"Continua...");
+				
+				
+				} else{
+					
+					JOptionPane.showMessageDialog(null,"Digitar apenas S (Sim) OU N (Não)");
+					
+						}
+					
+				}
+			
+				
+		});
+		
+}
+public  void motor() throws InterruptedException{  // faz a atualização do painel a cada 1 segundo
+
+	while(true){
+	
+		
+		
+	    this.repaint();
+		Thread.sleep(1000);
+
+	}
+
+}	
+
+
+
+public void run() {
+
+		try {
+			motor();
+			
+			
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}	// fim run
+
+	
+
+
+}

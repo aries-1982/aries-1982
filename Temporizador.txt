@@ -1,0 +1,146 @@
+package Gui;
+
+import java.awt.Color;
+
+import javax.swing.JFrame;
+
+public class Temporizador implements Runnable  {
+	
+	
+	
+	// var
+	
+	Color vermelho,amarelo,verde,red,yelow,green;
+	
+	
+	
+	public Color getVermelho2() {
+		return red;
+	}
+
+	public Color getAmarelo2() {
+		return yelow;
+	}
+
+	public Color getVerde2() {
+		return green;
+	}
+
+	public Color getVermelho() {
+		return vermelho;
+	}
+
+	public Color getAmarelo() {
+		return amarelo;
+	}
+
+	public Color getVerde() {
+		return verde;
+	}
+
+	
+	
+	//construtor
+	
+	
+	
+		
+	public Temporizador() {
+		
+		
+	}
+
+	//metodo 
+	public void temporizador() throws InterruptedException{        // metodo com loop infinito vai definindo a cor a ser adicionada nas variaveis do tipo Color 
+		
+			
+		
+		while(true){												// loop infinito					
+		
+				for(int i=0;i<=2;i++){								// define quais lampadas serão acesas
+				
+					if (i==0){	
+						 	
+						 	vermelho=Color.DARK_GRAY;
+							amarelo=Color.DARK_GRAY;
+							verde=Color.GREEN;
+							
+							green=Color.DARK_GRAY;
+							yelow=Color.DARK_GRAY;
+							red=Color.red;
+							
+							Thread.sleep(5000);						// tempo de cada lampada
+					
+						}	
+							
+						else
+							
+							if(i==1){
+						
+								verde=Color.DARK_GRAY;
+								amarelo=Color.yellow;
+								vermelho=Color.DARK_GRAY;
+							
+								green=Color.DARK_GRAY;
+								yelow=Color.DARK_GRAY;
+								red=Color.red;
+								
+								Thread.sleep(2000);
+								
+							}
+						else{
+							
+								verde=Color.DARK_GRAY;
+								amarelo=Color.DARK_GRAY;
+								vermelho=Color.red;
+							
+								red=Color.DARK_GRAY;
+								yelow=Color.DARK_GRAY;
+								green=Color.GREEN;
+								
+								Thread.sleep(5000);
+								green=Color.DARK_GRAY;
+								yelow=Color.yellow;
+								Thread.sleep(1000);
+							}
+				}
+			}
+		}
+	
+	
+
+
+	public void run() {										// Thread para o metodo temporizador
+
+		
+		try {
+			temporizador();
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+
+
+	}
+
+	
+		
+	}	
+			
+	
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+
